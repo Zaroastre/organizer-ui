@@ -1,0 +1,9 @@
+.empty-stock {
+    color: red;
+    font-weight: bold;
+}
+
+.full-stock {
+    color: green;
+    font-weight: bold;
+}
