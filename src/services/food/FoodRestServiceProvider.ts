@@ -15,6 +15,17 @@ export class FoodRestServiceProvider implements FoodService {
     private constructor() {
         
     }
+    addFood(food: Food): Promise<Food> {
+        return new Promise<Food>((accept, reject) => {
+            reject(new Error("Method not implemented."));
+        });
+    }
+    removeFromPantryByFoodId(id: number): Promise<Food> {
+        return new Promise<Food>((accept, reject) => {
+            reject(new Error("Method not implemented."));
+        });
+    }
+
     searchInPantryByName(name: string): Promise<Array<Food>> {
         return new Promise<Array<Food>>((accept, reject) => {
             reject(new Error("Method not implemented."));

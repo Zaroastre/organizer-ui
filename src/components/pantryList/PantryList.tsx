@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Food } from "../../entities/Food";
-import { PantryItem } from "../pantryItem/PantryItem";
+import { PantryItem } from "./pantryItem/PantryItem";
 import AddIcon from '@mui/icons-material/Add';
 import "./PantryList.css";
+import { ShoppingService } from "../../services/shopping/ShoppingService";
+import { FoodService } from "../../services/food/FoodService";
 
 interface PantryListProperties {
     values: Array<Food>;
-    onAddToCart: Function;
+    shoppingService: ShoppingService;
+    foodService: FoodService;
 }
 
-export function PantryList({values, onAddToCart}: PantryListProperties) {
+export function PantryList({values, shoppingService, foodService}: PantryListProperties) {
 
     const [filteredValues, setFilteredValue] = useState<Array<Food>>(new Array<Food>());
 
@@ -20,7 +23,7 @@ export function PantryList({values, onAddToCart}: PantryListProperties) {
 
     
     const renderFoods = () => {
-        return filteredValues.map((food) => <PantryItem food={food} onAddToCart={onAddToCart} />);
+        return filteredValues.map((food) => <PantryItem value={food} foodService={foodService} shoppingService={shoppingService} />);
     }
 
     const onSearchHandler = (event: any) => {
@@ -34,22 +37,24 @@ export function PantryList({values, onAddToCart}: PantryListProperties) {
 
     return (<table className="PantryList">
         <thead>
-            <tr>
+            <tr className="Advanced">
+                <td colSpan={2}>
+                    <div>
+                        <label htmlFor="search">Rechercher</label>
+                        <input type="search" name="search" id="search" placeholder="Aliment..." onChange={onSearchHandler} />
+                    </div>
+                </td>
+                <td>
+                    <Link to="food"><button className="ButtonCart"><AddIcon /></button></Link>
+                </td>
+            </tr>
+            <tr className="Titles">
                 <th>Aliment</th>
                 <th>Stock</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <input type="search" name="" id="" placeholder="Rechercher un aliment..." onChange={onSearchHandler} />
-                </td>
-                <td></td>
-                <td>
-                    <Link to="food"><button><AddIcon /></button></Link>
-                </td>
-            </tr>
             {renderFoods()}
         </tbody>
     </table>);

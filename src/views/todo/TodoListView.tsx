@@ -1,4 +1,4 @@
-import "./views.css";
+import "../views.css";
 
 interface TodoListViewProperties {
     

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { FoodCreator } from "../components/foodCreator/FoodCreator";
-import { PantryList } from "../components/pantryList/PantryList";
-import { Food } from "../entities/Food";
-import { FoodService } from "../services/food/FoodService";
-import { ShoppingService } from "../services/shopping/ShoppingService";
+import { PantryList } from "../../components/pantryList/PantryList";
+import { Food } from "../../entities/Food";
+import { FoodService } from "../../services/food/FoodService";
+import { ShoppingService } from "../../services/shopping/ShoppingService";
 
-import "./views.css";
+import "../views.css";
 
 interface PantryViewProperties {
     foodService: FoodService;
@@ -30,14 +29,10 @@ export function PantryView({foodService, shoppingService}: PantryViewProperties)
         });
     }
 
-    const onAddToCart = (name: string, quantity: number) => {
-        shoppingService.addToCart(name, quantity);
-    }
-
     return (<section className="View" id="pantry">
         <h1>Garde-Manger</h1>
         <div>
-            <PantryList values={foods} onAddToCart={onAddToCart} />
+            <PantryList values={foods} shoppingService={shoppingService} foodService={foodService} />
         </div>
     </section>);
 };

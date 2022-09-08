@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Card } from "../components/card/Card";
-import "./views.css";
+import { Card } from "../../components/card/Card";
+import "../views.css";
 
 interface HomeViewProperties {
 
@@ -26,6 +26,7 @@ class MenuItem {
 export function HomeView({ }: HomeViewProperties) {
 
     const menuItems: Array<MenuItem> = new Array(
+        new MenuItem("familly", "Ma Famille"),
         new MenuItem("todo", "Tâches à faire"),
         new MenuItem("planning", "Planning"),
         new MenuItem("pantry", "Garde-Manger"),
@@ -37,15 +38,11 @@ export function HomeView({ }: HomeViewProperties) {
     return (<section className="View" id="home">
         <h1>Bonjour Truc de la famille Bidule!</h1>
         <div>
-            <nav>
-                <ul>
-                    {
-                        menuItems.map((menuItem) => <li>
-                            <Card url={menuItem.getUrl()} title={menuItem.getTitle()} />
-                        </li>)
-                    }
-                </ul>
-            </nav>
+            {
+                menuItems.map((menuItem) => (
+                    <Card title={menuItem.getTitle()} subtile={menuItem.getTitle()} link={menuItem.getUrl()} />
+                ))
+            }
         </div>
     </section>);
 };

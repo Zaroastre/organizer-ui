@@ -57,7 +57,7 @@ export function ProductCreator({shoppingService, onBuyProduct}: ProductCreatorPr
             </div>
             <div>
                 <label htmlFor="">Quantité</label>
-                <input type="number" name="quantity" id="quantity" min={0} defaultValue={defaultProduct.quantity} value={foodToAdd.quantity} max={100} onChange={onQuantityChanged} />
+                <input type="number" name="quantity" id="quantity" min={0} defaultValue={defaultProduct.quantity} value={foodToAdd.quantity} max={10} onChange={onQuantityChanged} />
             </div>
             <button type="submit" disabled={!isValidName}>Ajouter nouvel aliment</button>
         </form>

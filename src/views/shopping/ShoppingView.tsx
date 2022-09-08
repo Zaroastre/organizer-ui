@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { CartList } from "../components/cartList/CartList";
-import { ProductCreator } from "../components/productCreator/ProductCreator";
-import { Product } from "../entities/Product";
-import { ShoppingService } from "../services/shopping/ShoppingService";
-import "./views.css";
+import { CartList } from "../../components/cartList/CartList";
+import { ProductCreator } from "../../components/productCreator/ProductCreator";
+import { Product } from "../../entities/Product";
+import { ShoppingService } from "../../services/shopping/ShoppingService";
+import "../views.css";
 
 interface ShoppingViewProperties {
     shoppingService: ShoppingService;

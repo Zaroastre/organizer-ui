@@ -34,4 +34,9 @@ export interface FoodService {
      * @param quantity 
      */
     consume(food: Food, quantity: number): Promise<Array<Food>>;
+
+    removeFromPantryByFoodId(id: number): Promise<Food>;
+
+    
+    addFood(food: Food): Promise<Food>;
 }

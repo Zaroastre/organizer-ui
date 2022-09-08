@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { FoodCreator } from "../components/foodCreator/FoodCreator";
-import { PantryList } from "../components/pantryList/PantryList";
-import { Activity } from "../entities/Activity";
-import { PlanningService } from "../services/planning/PlanningService";
-import "./views.css";
+import { FoodCreator } from "../../components/foodCreator/FoodCreator";
+import { PantryList } from "../../components/pantryList/PantryList";
+import { Activity } from "../../entities/Activity";
+import { PlanningService } from "../../services/planning/PlanningService";
+import "../views.css";
 
 interface PlanningViewProperties {
     planningService: PlanningService;

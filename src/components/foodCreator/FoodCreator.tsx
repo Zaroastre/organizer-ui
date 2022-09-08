@@ -59,7 +59,7 @@ export function FoodCreator({foodService, shoppingService, onAddFood}: FoodCreat
             </div>
             <div>
                 <label htmlFor="">Quantité</label>
-                <input type="number" name="quantity" id="quantity" min={0} defaultValue={defaultFood.stock} value={foodToAdd.stock} max={100} onChange={onQuantityChanged} />
+                <input type="number" name="quantity" id="quantity" min={0} defaultValue={defaultFood.stock} value={foodToAdd.stock} max={10} onChange={onQuantityChanged} />
             </div>
             <button type="submit" disabled={!isValidName}>Ajouter nouvel aliment</button>
         </form>

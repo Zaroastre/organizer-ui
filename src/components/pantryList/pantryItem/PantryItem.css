@@ -1,0 +1,38 @@
+.PantryItem .empty-stock {
+    color: rgba(255,0,0,1);
+    font-weight: bold;
+}
+
+.PantryItem .full-stock {
+    color: rgba(0,255,0,1);
+    font-weight: bold;
+}
+
+
+
+.PantryItem button.ButtonEdit {
+    border-color: rgba(0,255,255,1);
+    background-color: rgba(0,255,255,0.1);
+}
+
+.PantryItem button.ButtonEdit:hover {
+    background-color: rgba(0,255,255,0.25);
+    box-shadow: 0 0 15px 2px rgba(0,255,255,1);
+}
+
+.PantryItem button.ButtonAdd {
+    border-color: rgba(0,255,0,1);
+    background-color: rgba(0,255,0,0.1);
+}
+.PantryItem button.ButtonAdd:hover {
+    background-color: rgba(0,255,0,0.25);
+    box-shadow: 0 0 15px 2px rgba(0,255,0,1);
+}
+.PantryItem button.ButtonDelete {
+    border-color: rgba(255,0,0,1);
+    background-color: rgba(255,0,0,0.1);
+}
+.PantryItem button.ButtonDelete:hover {
+    background-color: rgba(255,0,0,0.25);
+    box-shadow: 0 0 15px 2px rgba(255,0,0,1);
+}

@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+import { Breadcrumbs } from "../breadcrumbs/Breadcrumbs";
+
 export function Header() {
     return (<header>
-        Header
+        <Breadcrumbs urlsTree={["/"]}  />
     </header>);
 }

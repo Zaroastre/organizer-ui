@@ -1,0 +1,6 @@
+export enum ProductType {
+    HYGIENE_PRODUCT,
+    HOUSEHOLD_PRODUCT,
+    OUTDOOR_PRODUCT,
+    EDIBLE_PRODUCT
+}
