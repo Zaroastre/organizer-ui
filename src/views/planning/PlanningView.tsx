@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Calendar } from "../../components/calendar/Calendar";
 import { FoodCreator } from "../../components/foodCreator/FoodCreator";
 import { PantryList } from "../../components/pantryList/PantryList";
 import { Activity } from "../../entities/Activity";
@@ -18,11 +19,11 @@ export function PlanningView({planningService}: PlanningViewProperties) {
     }, [activities]);
 
     const refreshListOfFoods = () => {
-        planningService.listPlanning().then((activitiesList) => {
-            setActivities(activitiesList);
-        }).catch((reason: any) => {
-            console.error(reason);
-        });
+        // planningService.listPlanning().then((activitiesList) => {
+        //     setActivities(activitiesList);
+        // }).catch((reason: any) => {
+        //     console.error(reason);
+        // });
     }
 
     
@@ -30,7 +31,7 @@ export function PlanningView({planningService}: PlanningViewProperties) {
     return (<section className="View" id="planning">
         <h1>Planning</h1>
         <div>
-            TODO
+            <Calendar />
         </div>
     </section>);
 };
