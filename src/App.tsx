@@ -47,6 +47,7 @@ function App() {
           <Route path="pantry/food" element={<FoodCreatorView foodService={FOOD_SERVICE} />} />
           <Route path="shopping" element={<ShoppingView shoppingService={SHIPPING_SERVICE} />} />
           <Route path="planning" element={<PlanningView planningService={PLANNING_SERVICE} />} />
+          <Route path="planning/:year/:mounth/:day" element={<PlanningView planningService={PLANNING_SERVICE} />} />
           <Route path="meal" element={<MealView />} />
           <Route path="cooking-recipe" element={<CookingRecipeView />} />
         </Routes>
