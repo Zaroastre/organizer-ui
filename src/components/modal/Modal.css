@@ -1,0 +1,25 @@
+.modal {
+    position: fixed;
+    z-index: 1003;
+    display: block;
+    opacity: 1;
+    top: 10%;
+    transform: scaleX(1) scaleY(1);
+    
+}
+
+.modal-overlay {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    background: #000;
+    display: none;
+    z-index: 1002;
+    display: block;
+    opacity: 0.8;
+}

@@ -1,31 +1,49 @@
+import { MockDB } from "../../commons/MockDB";
 import { Food } from "../../entities/Food";
 import { FoodService } from "./FoodService";
 
 export class FoodMockServiceProvider implements FoodService {
 
     private static instance: FoodService;
-    private foods: Food[];
 
-    static getInstance(isEmpty: boolean = false): FoodService {
+    /**
+     * Get the unique instance (or create it if it's doesn't exists) of this service provider.
+     *  
+     * @param mustInitializaData (Optionnal) Flag to indicate if the service provider embed some data or not.
+     * @returns The unique instance of this service provider.
+     */
+    static getInstance(mustInitializaData: boolean = false): FoodService {
         if (!FoodMockServiceProvider.instance) {
-            FoodMockServiceProvider.instance = new FoodMockServiceProvider(isEmpty);
+            FoodMockServiceProvider.instance = new FoodMockServiceProvider(mustInitializaData);
         }
         return FoodMockServiceProvider.instance;
     }
 
+    /**
+     * Generate a random number inside the range including limits (minimum, maximum).
+     * 
+     * @param min Minimum value to generate.
+     * @param max Maximum value to generate.
+     * @returns Random number.
+     */
     private getRandomNumberInRange(min: number, max: number) { return Math.round(Math.random () * (max - min) + min) ; }
 
-
-    private constructor(isEmpty: boolean = false) {
-        this.foods = new Array<Food>();
-        if (!isEmpty) {
+    /**
+     * Constructor for this service provider.
+     * 
+     * @param mustInitializaData (Optionnal) Flag to indicate if the service provider embed some data or not.
+     */
+    private constructor(mustInitializaData: boolean = false) {
+        if (mustInitializaData) {
             const totalFoods: number = this.getRandomNumberInRange(1, 50);
             for (let counter = 0; counter < totalFoods; counter++) {
-                let food = new Food();
-                food.id = counter+1;
-                food.name = String('NOURITURE-#').concat(String(food.id));
-                food.stock = this.getRandomNumberInRange(0, 2);
-                this.foods.push(food);
+                let id: number = counter+1;
+                let food = new Food.FoodBuilder()
+                        .withId(id)
+                        .withName(String('NOURITURE-#').concat(String(id)))
+                        .withQuantity(this.getRandomNumberInRange(0, 2))
+                        .build();
+                MockDB.EDIBLE.push(food);
             }
         }
 
@@ -34,9 +52,9 @@ export class FoodMockServiceProvider implements FoodService {
     addFood(food: Food): Promise<Food> {
         return new Promise<Food>((resolve, reject) => {
             if (food) {
-                this.searchInPantryByName(food.name).then((foodsWithSameName) => {
+                this.searchInPantryByName(food.getName()).then((foodsWithSameName) => {
                     if (foodsWithSameName.length == 0) {
-                        this.foods.push(food);
+                        MockDB.EDIBLE.push(food);
                         resolve(food);
                     } else {
                         reject(String(400));
@@ -52,9 +70,9 @@ export class FoodMockServiceProvider implements FoodService {
     removeFromPantryByFoodId(id: number): Promise<Food> {
         return new Promise<Food>((resolve, reject) => {
             this.findById(id).then((food) => {
-                let index: number = this.foods.indexOf(food);
+                let index: number = MockDB.EDIBLE.indexOf(food);
                 if (index >= 0) {
-                    let deletedFoods: Array<Food> = this.foods.splice(index, 1);
+                    let deletedFoods: Array<Food> = MockDB.EDIBLE.splice(index, 1);
                     if (deletedFoods.length > 0) {
                         resolve(deletedFoods[0]);
                     } else {
@@ -70,7 +88,7 @@ export class FoodMockServiceProvider implements FoodService {
     }
     findById(id: number): Promise<Food> {
         return new Promise<Food>((resolve, reject) => {
-            let filteredFoods: Array<Food> = this.foods.filter((food) => food.id === id);
+            let filteredFoods: Array<Food> = MockDB.EDIBLE.filter((food) => food.getId() === id);
             if (filteredFoods.length > 0) {
                 resolve(filteredFoods[0]);
             } else {
@@ -82,13 +100,13 @@ export class FoodMockServiceProvider implements FoodService {
     
     searchInPantryByName(name: string): Promise<Array<Food>> {
         return new Promise<Array<Food>>((resolve, reject) => {
-            resolve(this.foods.filter((food) => food.name.toLowerCase() == name.toLowerCase()));
+            resolve(MockDB.EDIBLE.filter((food) => food.getName().toLowerCase() == name.toLowerCase()));
         });
     }
 
     searchInPantryByNameContains(name: string): Promise<Array<Food>> {
         return new Promise<Array<Food>>((resolve, reject) => {
-            resolve(this.foods.filter((food) => food.name.toLowerCase().includes(name.toLowerCase())));
+            resolve(MockDB.EDIBLE.filter((food) => food.getName().toLowerCase().includes(name.toLowerCase())));
         });
     }
 
@@ -100,7 +118,7 @@ export class FoodMockServiceProvider implements FoodService {
     
     listPantry(): Promise<Array<Food>> {
         return new Promise<Array<Food>>((resolve, reject) => {
-            resolve(this.foods);
+            resolve(MockDB.EDIBLE);
         });
     }
 

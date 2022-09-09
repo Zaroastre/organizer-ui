@@ -1,15 +1,11 @@
 import { Product } from "../../entities/Product";
-import { CartItem } from "../cartItem/CartItem";
+import { CartItem } from "./cartItem/CartItem";
 
 interface PantryListProperties {
     values: Array<Product>;
 }
 
-export function CartList({values}: PantryListProperties) {
-    
-    const renderFoods = () => {
-        return values.map((product) => <CartItem product={product} />);
-    } 
+export function CartList({ values }: PantryListProperties) {
 
     return (<table>
         <thead>
@@ -20,7 +16,9 @@ export function CartList({values}: PantryListProperties) {
             </tr>
         </thead>
         <tbody>
-            {renderFoods()}
+            {
+                values.map((product) => <CartItem value={product} />)
+            }
         </tbody>
     </table>);
 }

@@ -14,10 +14,10 @@ interface PopupAddToCartProperties {
 export function PopupAddToCart({food, shoppingService, onConfirm, onCancel}: PopupAddToCartProperties) {
 
     const [quantityToBuy, setQuantityToBuy] = useState(0);
-    const [newStock, setNewStock] = useState(food.stock + quantityToBuy);
+    const [newStock, setNewStock] = useState(food.getQuantity() + quantityToBuy);
 
     useEffect(() => {
-        setNewStock(food.stock + quantityToBuy);
+        setNewStock(food.getQuantity() + quantityToBuy);
     }, [quantityToBuy]);
 
     const onChangeQuantityHandler = (event: any) => {
@@ -34,14 +34,14 @@ export function PopupAddToCart({food, shoppingService, onConfirm, onCancel}: Pop
 
 
     return (<section className="PopupAddToCart" id="popup-add-to-cart">
-        <h2>Ajouter <code>{food.name}</code> à la liste de course</h2>
+        <h2>Ajouter <code>{food.getName()}</code> à la liste de course</h2>
         <form onSubmit={onSubmitCart}>
             <tr>
                 <th>
                     <label htmlFor="stock">Stock disponible</label>
                 </th>
                 <td>
-                    <p>{food.stock}</p>
+                    <p>{food.getQuantity()}</p>
                 </td>
             </tr>
             <tr>

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Product } from "../../entities/Product";
+import { Product } from "../../../entities/Product";
 
 interface CartItemProperties {
-    product: Product;
+    value: Product;
 }
 
-export function CartItem({product}: CartItemProperties) {
+export function CartItem({value}: CartItemProperties) {
     const [quantity, setQuantity] = useState(0);
 
     const onQuantityChange = (event: any) => {
@@ -13,8 +13,8 @@ export function CartItem({product}: CartItemProperties) {
     } 
 
     return (<tr>
-        <td>{product.name}</td>
-        <td>{product.quantity}</td>
+        <td>{value.getName()}</td>
+        <td>{value.getQuantity()}</td>
         <td>
             <div>
                 <input type={"number"} min={0} defaultValue={0} max={10} onChange={onQuantityChange} />

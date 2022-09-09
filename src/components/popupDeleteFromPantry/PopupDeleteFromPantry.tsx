@@ -19,7 +19,7 @@ export function PopupDeleteFromPantry({food, onConfirm, onCancel}: PopupDeleteFr
 
     return (<section className="PopupDeleteFromPantry">
         <div>
-            <p>Êtes-vous sûr.e de vouloir supprimer définitivement cet aliment ({food.stock}x{food.name}) de votre garde manger ?</p>
+            <p>Êtes-vous sûr.e de vouloir supprimer définitivement cet aliment ({food.getQuantity()}x{food.getName()}) de votre garde manger ?</p>
             <div>
                 <button type="button" onClick={onConfirmHandler}>Oui, supprimer</button>
                 <button type="button" onClick={onCnacelHandler}>Non, annuler</button>

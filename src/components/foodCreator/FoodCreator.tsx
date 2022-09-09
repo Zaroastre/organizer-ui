@@ -10,15 +10,15 @@ interface FoodCreatorProperties {
 }
 
 export function FoodCreator({foodService, shoppingService, onAddFood}: FoodCreatorProperties) {
-    const defaultFood = new Food();
-    const [foodToAdd, setFoodToAdd] = useState<Food>(new Food());
+    const defaultFood = new Food.FoodBuilder().build();
+    const [foodToAdd, setFoodToAdd] = useState<Food>(new Food.FoodBuilder().build());
     const [isValidName, setValidName] = useState(false);
 
     const onSubmitAddFoodHandler = (event: any) => {
         event.preventDefault();
         if (isValidName) {
-            shoppingService.buy(foodToAdd.name, foodToAdd.stock).then((data) => {
-                setFoodToAdd(new Food());
+            shoppingService.buy(foodToAdd.getName(), foodToAdd.getQuantity()).then((data) => {
+                setFoodToAdd(new Food.FoodBuilder().build());
                 onAddFood();
             }).catch((reason: any) => {
                 console.error(reason);
@@ -28,7 +28,7 @@ export function FoodCreator({foodService, shoppingService, onAddFood}: FoodCreat
 
     const updateFoodName = (name: string) => {
         let food: Food = foodToAdd;
-        food.name = name;
+        food.setName(name);
         setFoodToAdd(food);
     }
 
@@ -47,7 +47,7 @@ export function FoodCreator({foodService, shoppingService, onAddFood}: FoodCreat
     const onQuantityChanged = (event: any) => {
         const quantity: number = event.target.value;
         let food: Food = foodToAdd;
-        food.stock = quantity;
+        food.setQuantity(quantity);
         setFoodToAdd(food);
     }
 
@@ -55,11 +55,11 @@ export function FoodCreator({foodService, shoppingService, onAddFood}: FoodCreat
         <form onSubmit={onSubmitAddFoodHandler}>
             <div>
                 <label htmlFor="">Aliment</label>
-                <input type="text" name="name" id="name" defaultValue={defaultFood.name} onChange={onNameChanged} />
+                <input type="text" name="name" id="name" defaultValue={defaultFood.getName()} onChange={onNameChanged} />
             </div>
             <div>
                 <label htmlFor="">Quantité</label>
-                <input type="number" name="quantity" id="quantity" min={0} defaultValue={defaultFood.stock} value={foodToAdd.stock} max={10} onChange={onQuantityChanged} />
+                <input type="number" name="quantity" id="quantity" min={0} defaultValue={defaultFood.getQuantity()} value={foodToAdd.getQuantity()} max={10} onChange={onQuantityChanged} />
             </div>
             <button type="submit" disabled={!isValidName}>Ajouter nouvel aliment</button>
         </form>

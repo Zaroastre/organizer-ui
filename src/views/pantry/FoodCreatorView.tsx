@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PantryList } from "../../components/pantryList/PantryList";
 import { Food } from "../../entities/Food";
 import { FoodService } from "../../services/food/FoodService";
-import { ShoppingService } from "../../services/shopping/ShoppingService";
 
 import "../views.css";
 
@@ -13,7 +11,7 @@ interface FoodCreatorViewProperties {
 
 export function FoodCreatorView({ foodService }: FoodCreatorViewProperties) {
 
-    const [food, setFood] = useState(new Food());
+    const [food, setFood] = useState(new Food.FoodBuilder().build());
     let navigate = useNavigate();
 
 
@@ -32,12 +30,12 @@ export function FoodCreatorView({ foodService }: FoodCreatorViewProperties) {
 
     const updateFoodName = (event: any) => {
         let tempFood: Food = food;
-        tempFood.name = event.target.value;
+        tempFood.setName(event.target.value);
         setFood(tempFood);
     }
     const updateFoodQuantity = (event: any) => {
         let tempFood: Food = food;
-        tempFood.stock = parseInt(event.target.value);
+        tempFood.setQuantity(parseInt(event.target.value));
         setFood(tempFood);
     }
 

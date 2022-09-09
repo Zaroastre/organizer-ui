@@ -5,6 +5,11 @@ export class FoodRestServiceProvider implements FoodService {
 
     private static instance: FoodService;
 
+    /**
+     * Get the unique instance (or create it if it's doesn't exists) of this service provider.
+     *  
+     * @returns The unique instance of this service provider.
+     */
     static getInstance(): FoodService {
         if (!FoodRestServiceProvider.instance) {
             FoodRestServiceProvider.instance = new FoodRestServiceProvider()
@@ -12,9 +17,13 @@ export class FoodRestServiceProvider implements FoodService {
         return FoodRestServiceProvider.instance;
     }
 
+    /**
+     * Constructor for this service provider.
+     */
     private constructor() {
         
     }
+    
     addFood(food: Food): Promise<Food> {
         return new Promise<Food>((accept, reject) => {
             reject(new Error("Method not implemented."));

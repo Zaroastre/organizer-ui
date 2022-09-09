@@ -1,19 +1,27 @@
+import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Food } from "../../entities/Food";
-import { PantryItem } from "./pantryItem/PantryItem";
-import AddIcon from '@mui/icons-material/Add';
-import "./PantryList.css";
-import { ShoppingService } from "../../services/shopping/ShoppingService";
 import { FoodService } from "../../services/food/FoodService";
+import { ShoppingService } from "../../services/shopping/ShoppingService";
+import { PantryItem } from "./pantryItem/PantryItem";
+import "./PantryList.css";
 
 interface PantryListProperties {
     values: Array<Food>;
     shoppingService: ShoppingService;
     foodService: FoodService;
+    onDisplayPopupAddToCart: Function;
+    onDisplayPopupDeleteFromPantry: Function;
 }
 
-export function PantryList({values, shoppingService, foodService}: PantryListProperties) {
+export function PantryList({
+    values,
+    shoppingService,
+    foodService,
+    onDisplayPopupAddToCart,
+    onDisplayPopupDeleteFromPantry
+}: PantryListProperties) {
 
     const [filteredValues, setFilteredValue] = useState<Array<Food>>(new Array<Food>());
 
@@ -21,15 +29,10 @@ export function PantryList({values, shoppingService, foodService}: PantryListPro
         setFilteredValue(values);
     }, [values]);
 
-    
-    const renderFoods = () => {
-        return filteredValues.map((food) => <PantryItem value={food} foodService={foodService} shoppingService={shoppingService} />);
-    }
-
     const onSearchHandler = (event: any) => {
-        let filter =event.target.value;
+        let filter = event.target.value;
         if (filter && filter.length > 0) {
-            setFilteredValue(values.filter((value) => value.name.toLowerCase().includes(filter.toLowerCase())));
+            setFilteredValue(values.filter((value) => value.getName().toLowerCase().includes(filter.toLowerCase())));
         } else {
             setFilteredValue(values);
         }
@@ -55,7 +58,15 @@ export function PantryList({values, shoppingService, foodService}: PantryListPro
             </tr>
         </thead>
         <tbody>
-            {renderFoods()}
+            {
+                filteredValues.map((food) => <PantryItem
+                    value={food}
+                    foodService={foodService}
+                    shoppingService={shoppingService}
+                    onDisplayPopupAddToCart={onDisplayPopupAddToCart}
+                    onDisplayPopupDeleteFromPantry={onDisplayPopupDeleteFromPantry}
+                />)
+            }
         </tbody>
     </table>);
 }

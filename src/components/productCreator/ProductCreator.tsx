@@ -8,15 +8,15 @@ interface ProductCreatorProperties {
 }
 
 export function ProductCreator({shoppingService, onBuyProduct}: ProductCreatorProperties) {
-    const defaultProduct = new Product();
-    const [foodToAdd, setProductToAdd] = useState<Product>(new Product());
+    const defaultProduct = new Product.ProductBuilder().build();
+    const [foodToAdd, setProductToAdd] = useState<Product>(new Product.ProductBuilder().build());
     const [isValidName, setValidName] = useState(false);
 
     const onSubmitAddProductHandler = (event: any) => {
         event.preventDefault();
         if (isValidName) {
-            shoppingService.buy(foodToAdd.name, foodToAdd.quantity).then((data) => {
-                setProductToAdd(new Product());
+            shoppingService.buy(foodToAdd.getName(), foodToAdd.getQuantity()).then((data) => {
+                setProductToAdd(new Product.ProductBuilder().build());
                 onBuyProduct();
             }).catch((reason: any) => {
                 console.error(reason);
@@ -26,7 +26,7 @@ export function ProductCreator({shoppingService, onBuyProduct}: ProductCreatorPr
 
     const updateProductName = (name: string) => {
         let food: Product = foodToAdd;
-        food.name = name;
+        food.setName(name);
         setProductToAdd(food);
     }
 
@@ -45,7 +45,7 @@ export function ProductCreator({shoppingService, onBuyProduct}: ProductCreatorPr
     const onQuantityChanged = (event: any) => {
         const quantity: number = event.target.value;
         let food: Product = foodToAdd;
-        food.quantity = quantity;
+        food.setQuantity(quantity);
         setProductToAdd(food);
     }
 
@@ -53,11 +53,11 @@ export function ProductCreator({shoppingService, onBuyProduct}: ProductCreatorPr
         <form onSubmit={onSubmitAddProductHandler}>
             <div>
                 <label htmlFor="">Aliment</label>
-                <input type="text" name="name" id="name" defaultValue={defaultProduct.name} onChange={onNameChanged} />
+                <input type="text" name="name" id="name" defaultValue={defaultProduct.getName()} onChange={onNameChanged} />
             </div>
             <div>
                 <label htmlFor="">Quantité</label>
-                <input type="number" name="quantity" id="quantity" min={0} defaultValue={defaultProduct.quantity} value={foodToAdd.quantity} max={10} onChange={onQuantityChanged} />
+                <input type="number" name="quantity" id="quantity" min={0} defaultValue={defaultProduct.getQuantity()} value={foodToAdd.getQuantity()} max={10} onChange={onQuantityChanged} />
             </div>
             <button type="submit" disabled={!isValidName}>Ajouter nouvel aliment</button>
         </form>

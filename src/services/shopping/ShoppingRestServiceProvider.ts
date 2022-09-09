@@ -5,6 +5,11 @@ export class ShoppingRestServiceProvider implements ShoppingService {
 
     private static instance: ShoppingService;
 
+    /**
+     * Get the unique instance (or create it if it's doesn't exists) of this service provider.
+     *  
+     * @returns The unique instance of this service provider.
+     */
     static getInstance(): ShoppingService {
         if (!ShoppingRestServiceProvider.instance) {
             ShoppingRestServiceProvider.instance = new ShoppingRestServiceProvider()
@@ -12,6 +17,9 @@ export class ShoppingRestServiceProvider implements ShoppingService {
         return ShoppingRestServiceProvider.instance;
     }
 
+    /**
+     * Constructor for this service provider.
+     */
     private constructor() {
         
     }
