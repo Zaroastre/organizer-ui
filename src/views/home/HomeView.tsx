@@ -26,7 +26,7 @@ class MenuItem {
 export function HomeView({ }: HomeViewProperties) {
 
     const menuItems: Array<MenuItem> = new Array(
-        new MenuItem("familly", "Ma Famille"),
+        new MenuItem("familly", "Famille"),
         new MenuItem("todo", "Tâches à faire"),
         new MenuItem("planning", "Planning"),
         new MenuItem("pantry", "Garde-Manger"),
@@ -36,7 +36,7 @@ export function HomeView({ }: HomeViewProperties) {
     );
 
     return (<section className="View" id="home">
-        <h1>Bonjour Truc de la famille Bidule!</h1>
+        <h1>{(new Date().getHours() < 17) ? "Bonjour" : "Bonsoir"} Truc de la famille Bidule!</h1>
         <div>
             {
                 menuItems.map((menuItem) => (
