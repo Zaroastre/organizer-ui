@@ -1,0 +1,13 @@
+section#planning div > label {
+    display: inline-flex;
+    width: 10rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border: solid 2px rgba(0,0,0,1);
+    text-align: center;
+}
+
+section#planning div >  input:checked + label {
+    background-color: rgba(0,0,0,1);
+    color: rgba(255,255,255,1);
+} 

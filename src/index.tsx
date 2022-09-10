@@ -4,12 +4,27 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import French from './lang/fr.json';
+import English from './lang/en.json';
+import { IntlProvider } from 'react-intl';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const LOCALE = navigator.language;
+let lang = English;
+if (LOCALE==="fr") {
+  lang = French;
+}
+
+
 root.render(
   <React.StrictMode>
-    <App />
+    <IntlProvider locale={LOCALE} messages={lang}>
+      <App />
+
+    </IntlProvider>
   </React.StrictMode>
 );
 

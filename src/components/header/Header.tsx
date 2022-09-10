@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "../breadcrumbs/Breadcrumbs";
 
-export function Header() {
+interface HeaderProperties {
+    icon: JSX.Element;
+    title: string;
+
+}
+
+export function Header({icon, title}: HeaderProperties) {
     return (<header>
-        <Breadcrumbs urlsTree={["/"]}  />
+        <Breadcrumbs icon={icon} title={title}  />
     </header>);
 }

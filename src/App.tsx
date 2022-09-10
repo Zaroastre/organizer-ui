@@ -18,6 +18,14 @@ import { ShoppingView } from './views/shopping/ShoppingView';
 import { PlanningServiceFactory } from './services/planning/PlanningServiceFactory';
 import { PlanningService } from './services/planning/PlanningService';
 
+import Diversity1Icon from '@mui/icons-material/Diversity1';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+
 import { PlanningView } from './views/planning/PlanningView';
 import { TodoListView } from './views/todo/TodoListView';
 import { MealView } from './views/meal/MealView';
@@ -30,14 +38,12 @@ import { FoodCreatorView } from './views/pantry/FoodCreatorView';
 
 function App() {
   const SERVICE_PROVIDER_TYPE: ServiceProviderType = ServiceProviderType.MOCK;
-
   const FOOD_SERVICE: FoodService = FoodServiceFactory.create(SERVICE_PROVIDER_TYPE);
   const SHIPPING_SERVICE: ShoppingService = ShoppingServiceFactory.create(SERVICE_PROVIDER_TYPE);
   const PLANNING_SERVICE: PlanningService = PlanningServiceFactory.create(SERVICE_PROVIDER_TYPE);
-
   return (
     <BrowserRouter>
-      <Header />
+      <Header title='' icon={<></>} />
       <main>
         <Routes>
           <Route path="/" element={<HomeView />} />

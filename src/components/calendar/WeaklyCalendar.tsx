@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DayOfWeek, DayOfWeekParser } from "../../commons/DayOfWeek";
+import { Month, MonthParser } from "../../commons/Month";
 import { Activity } from "../../entities/Activity";
 import "./Calendar.css";
 
@@ -82,7 +83,7 @@ export function WeaklyCalendar({ events }: WeaklyCalendarProperties) {
             daysNames.push(<th>
                 {DayOfWeek[index]}
                 <br />
-                ({workingDate.getDate()+deltaDaysFromNow} {workingDate.getMonth()+deltaMonthFromNow} {workingDate.getFullYear()+deltaYearFromNow})
+                ({workingDate.getDate()+deltaDaysFromNow} {Month[(workingDate.getMonth()+deltaMonthFromNow)].substring(0, 3)} {workingDate.getFullYear()+deltaYearFromNow})
             </th>)
         }
         return daysNames.map((dayName) => dayName)
@@ -90,7 +91,7 @@ export function WeaklyCalendar({ events }: WeaklyCalendarProperties) {
 
     const displayWeak = (day: Date) => {
         let days: Array<JSX.Element> = new Array();
-        for (let hour = 6; hour < TOTAL_ROWS-4; hour++) {
+        for (let hour = 0; hour < TOTAL_ROWS-0; hour++) {
             let hoursInDay: Array<JSX.Element> = new Array();
             for (let day = 0; day < TOTAL_COLUMNS + 1; day++) {
                 if (day == 0) {

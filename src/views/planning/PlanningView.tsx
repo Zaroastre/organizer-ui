@@ -6,6 +6,7 @@ import { PantryList } from "../../components/pantryList/PantryList";
 import { Activity } from "../../entities/Activity";
 import { PlanningService } from "../../services/planning/PlanningService";
 import "../views.css";
+import "./PlanningView.css"
 
 interface PlanningViewProperties {
     planningService: PlanningService;
@@ -31,7 +32,7 @@ export function PlanningView({planningService}: PlanningViewProperties) {
             <div>
                 <input type="radio" name="calendar-view" id="weakly-calendar" value={CalendarViewType.WEAK} onChange={updateCalendarView} />
                 <label htmlFor="weakly-calendar">Afficher la semaine</label>
-                <input type="radio" name="calendar-view" id="monthly-calendar" value={CalendarViewType.MONTH} onChange={updateCalendarView}/>
+                <input type="radio" name="calendar-view" id="monthly-calendar" value={CalendarViewType.MONTH} defaultChecked={true} onChange={updateCalendarView}/>
                 <label htmlFor="monthly-calendar">Afficher le mois</label>
 
             </div>

@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
 
 interface BreadcrumbsProperties {
-    urlsTree: Array<string>;
+    icon: JSX.Element;
+    title: string;
 }
 
-export function Breadcrumbs({ urlsTree }: BreadcrumbsProperties) {
+export function Breadcrumbs({ icon, title }: BreadcrumbsProperties) {
     return (
         <nav className="black">
             <div className="nav-wrapper">
                 <div className="col s12">
-                    {
-                        urlsTree.map((menuItem) => (
-                            <Link to={menuItem}>{menuItem}</Link>
-                        ))
-                    }
+                    <Link to="/"><HomeIcon /></Link>
+                    {icon}
+                    {title}
                 </div>
             </div>
         </nav>
