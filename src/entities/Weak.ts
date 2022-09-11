@@ -16,15 +16,26 @@ export class Weak {
 }
 
 export class WeakFactory {
-    static create(weakNumber: number, year: number): Weak {
-        console.log(weakNumber)
+
+    private static computeNextDay(day: Date): Date {
+        
+        let nextDate: Date;
+        nextDate = new Date(day.setDate(day.getDate()+1));
+        if (nextDate.getDate() < day.getDate()) {
+            nextDate = new Date(nextDate.setMonth(nextDate.getMonth()+1));
+            if (day.getMonth() < day.getMonth()) {
+                nextDate = new Date(day.setFullYear(day.getFullYear()+1));
+            }
+        }
+        return nextDate;        
+    }
+    public static create(weakNumber: number, year: number): Weak {
         let days: Array<Day> = new Array(TOTAL_DAYS_IN_WEAK);
         const MONDAY_VALUE: number = 2;
         let monday = new Date(year, 0, (MONDAY_VALUE + (weakNumber - 1) * TOTAL_DAYS_IN_WEAK));
         let dayOfTheWeak: Date = monday;
         for (let index = 0; index < TOTAL_DAYS_IN_WEAK; index++) {
-            let day: Date = new Date(dayOfTheWeak.setDate(dayOfTheWeak.getDate()+1));
-            days[index] = new Day(day);
+            days[index] = new Day(WeakFactory.computeNextDay(dayOfTheWeak));
         }
         return new Weak(weakNumber, days);
     }

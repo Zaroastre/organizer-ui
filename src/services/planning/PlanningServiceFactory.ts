@@ -9,7 +9,7 @@ export class PlanningServiceFactory {
         if (type === ServiceProviderType.REST_SERVICE) {
             service = PlanningRestServiceProvider.getInstance();
         } else {
-            service = PlanningMockServiceProvider.getInstance();
+            service = PlanningMockServiceProvider.getInstance(true);
         }
         return service;
     }

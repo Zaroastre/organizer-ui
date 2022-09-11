@@ -17,8 +17,15 @@ export function PlanningView({planningService}: PlanningViewProperties) {
     const [activities, setActivities] = useState(new Array<Activity>());
     const [calendarView, setCalendarView] = useState<CalendarViewType>(CalendarViewType.WEAK);
 
+    useEffect(() => {
+        planningService.listPlanning().then((activitiesList) => {
+            setActivities(activitiesList);
+        }).catch((reason) => {
+            console.error(reason);
+        })
+    }, [])
+
     const updateCalendarView = (event: any) => {
-        console.log(event.target.value)
         let index: number = parseInt(event.target.value);
         if (index >= 0) {
             setCalendarView(CalendarViewTypeParser.parse(index));

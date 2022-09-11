@@ -10,9 +10,9 @@ export enum DayOfWeek {
 
 export class DayOfWeekParser {
     private constructor() { }
-    static parse(month: number): DayOfWeek {
+    static parse(day: number): DayOfWeek {
         let result: DayOfWeek;
-        switch (month) {
+        switch (day) {
             case 0:
                 result = DayOfWeek.MONDAY
                 break;

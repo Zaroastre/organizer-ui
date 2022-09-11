@@ -12,14 +12,13 @@ interface WeaklyCalendarProperties {
 }
 
 export function WeaklyCalendar({ events }: WeaklyCalendarProperties) {
-    let deltaDays: number = 0;
     const NOW: Date = new Date();
     const TOTAL_ROWS: number = 24;
     const TOTAL_COLUMNS: number = 7;
 
 
     const getNumberOfTheWeak = (date: Date) => {
-        let now: Date = new Date();
+        let now: Date = date;
         let start: Date = new Date(now.getFullYear(), 0, 1);
         let days = Math.floor((now.getTime() - start.getTime()) /
             (24 * 60 * 60 * 1000));
@@ -32,61 +31,49 @@ export function WeaklyCalendar({ events }: WeaklyCalendarProperties) {
     const [weakNumber, setWeakNumber] = useState(selectedWeakNumber);
     const [weak, setWeak] = useState(WeakFactory.create(weakNumber, workingDate.getFullYear()));
 
+    const isSameDay = (date1: Date, date2: Date) => {
+        return ((date1.getFullYear() == date2.getFullYear()) &&
+            (date1.getMonth() == date2.getMonth()) &&
+            (date1.getDay() == date2.getDay()));
+    }
 
     useEffect(() => {
         setWorkingDate(date);
-        setWeak(WeakFactory.create(weakNumber, date.getFullYear()));
+        let newWeak: Weak = WeakFactory.create(weakNumber, date.getFullYear());
+        let eventsOfTheWeak: Array<Activity> = events.filter((event) => newWeak.getDays()[0].getDate() <= event.getDate() && event.getDate() <= newWeak.getDays()[newWeak.getDays().length - 1].getDate());
+        console.log(eventsOfTheWeak)
+        newWeak.getDays().forEach(day => {
+            let activitiesOfTheDay: Array<Activity> = new Array();
+            eventsOfTheWeak.forEach((activity) => {
+                if (isSameDay(day.getDate(), activity.getDate())) {
+                    activitiesOfTheDay.push(activity);
+                }
+            })
+            console.log(activitiesOfTheDay);
+            day.setActivities(activitiesOfTheDay);
+        });
+        setWeak(newWeak);
     }, [date]);
-
-    const rollbackToOneWeakInPast = (date: Date) => {
-
-    }
-
-    const jumpToOneWeakInFutur = (date: Date) => {
-
-    }
-
-    const computeDaysOfWeak = (date: Date) => {
-
-    }
 
     useEffect(() => {
         setWeakNumber(selectedWeakNumber);
         setWeak(WeakFactory.create(selectedWeakNumber, date.getFullYear()));
-
     }, [selectedWeakNumber]);
 
 
     const changeToPreviousWeak = () => {
-        let newWeakNumber: number =selectedWeakNumber - 1;
+        let newWeakNumber: number = selectedWeakNumber - 1;
         setSelectedWeakNumber(newWeakNumber);
         setDate(new Date(date.getTime()));
     }
 
     const changeToNextWeak = () => {
-        let newWeakNumber: number =selectedWeakNumber + 1;
+        let newWeakNumber: number = selectedWeakNumber + 1;
         setSelectedWeakNumber(newWeakNumber);
         setDate(new Date(date.getTime()));
     }
 
-
-
-    const displayDaysNameHeader = () => {
-        const daysNames: Array<JSX.Element> = new Array();
-        daysNames.push(<th></th>)
-
-        weak.getDays().forEach((day) => {
-            daysNames.push((<th>
-                {DayOfWeek[day.getDate().getDay() - 1]}
-                <br />
-                ({day.getDate().getDate()} {Month[(workingDate.getMonth())].substring(0, 3)} {workingDate.getFullYear()})
-            </th>));
-        })
-        return daysNames.map((dayName) => dayName)
-    }
-
     const displayWeak = () => {
-        let weak: Weak = WeakFactory.create(weakNumber, workingDate.getFullYear());
         let days: Array<JSX.Element> = new Array();
         for (let hour = 0; hour < TOTAL_ROWS - 0; hour++) {
             let hoursInDay: Array<JSX.Element> = new Array();
@@ -105,17 +92,17 @@ export function WeaklyCalendar({ events }: WeaklyCalendarProperties) {
                     >
                         go
                     </Link>);
-                    if (day === NOW.getDay()) {
-                        if (hour === NOW.getHours()) {
-                            hoursInDay.push((<td className="lime accent-4">
-                                {cellContent}
-                            </td>));
-                        } else {
-                            hoursInDay.push((<td className="lime lighten-4">{cellContent}</td>));
-                        }
-                    } else {
-                        hoursInDay.push((<td>{cellContent}</td>));
-                    }
+                    // if (day === NOW.getDay()) {
+                    //     if (hour === NOW.getHours()) {
+                    //         hoursInDay.push((<td className="lime accent-4">
+                    //             {cellContent}
+                    //         </td>));
+                    //     } else {
+                    //         hoursInDay.push((<td className="lime lighten-4">{cellContent}</td>));
+                    //     }
+                    // } else {
+                        hoursInDay.push((<td>{cellContent} {dayOfTheWeak.getActivities().length}</td>));
+                    // }
                 }
             }
             days.push((<tr>
@@ -125,10 +112,6 @@ export function WeaklyCalendar({ events }: WeaklyCalendarProperties) {
         }
         return days.map((day) => day);
     }
-
-    useEffect(() => {
-        setWorkingDate(date);
-    }, [date])
 
     return (
         <table>
@@ -158,9 +141,9 @@ export function WeaklyCalendar({ events }: WeaklyCalendarProperties) {
                 <tr>
                     <th></th>
                     {weak.getDays().map((day) => (<th>
-                        {DayOfWeek[day.getDate().getDay()-1]}
+                        {DayOfWeek[DayOfWeekParser.parse(day.getDate().getDay()) - 1]}
                         <br />
-                        ({day.getDate().getDate()} {Month[(workingDate.getMonth())].substring(0, 3)} {workingDate.getFullYear()})
+                        ({day.getDate().getDate()} {Month[(day.getDate().getMonth())].substring(0, 3)} {day.getDate().getFullYear()})
                     </th>))}
                 </tr>
             </thead>
