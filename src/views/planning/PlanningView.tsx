@@ -30,9 +30,9 @@ export function PlanningView({planningService}: PlanningViewProperties) {
         <h1>Planning</h1>
         <div>
             <div>
-                <input type="radio" name="calendar-view" id="weakly-calendar" value={CalendarViewType.WEAK} onChange={updateCalendarView} />
+                <input type="radio" name="calendar-view" id="weakly-calendar" value={CalendarViewType.WEAK} defaultChecked={calendarView==CalendarViewType.WEAK} onChange={updateCalendarView} />
                 <label htmlFor="weakly-calendar">Afficher la semaine</label>
-                <input type="radio" name="calendar-view" id="monthly-calendar" value={CalendarViewType.MONTH} defaultChecked={true} onChange={updateCalendarView}/>
+                <input type="radio" name="calendar-view" id="monthly-calendar" value={CalendarViewType.MONTH} defaultChecked={calendarView==CalendarViewType.MONTH} onChange={updateCalendarView}/>
                 <label htmlFor="monthly-calendar">Afficher le mois</label>
 
             </div>
