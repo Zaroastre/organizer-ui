@@ -4,12 +4,9 @@ import { DayOfWeek } from "../../commons/DayOfWeek";
 import { Month } from "../../commons/Month";
 import { Activity } from "../../entities/Activity";
 import "./Calendar.css";
+import { CalendarProperties } from "./CalendarProperties";
 
-interface MonthlyCalendarProperties {
-    events: Array<Activity>;
-}
-
-export function MonthlyCalendar({ events }: MonthlyCalendarProperties) {
+export function MonthlyCalendar({ now, events }: CalendarProperties) {
 
     const TOTAL_MONTHS: number = 12;
     const NOW: Date = new Date();
@@ -108,7 +105,7 @@ export function MonthlyCalendar({ events }: MonthlyCalendarProperties) {
                     <th colSpan={TOTAL_COLUMNS} className="center">
                         <button
                             type="button"
-                            className="waves-effect waves-light btn"
+                            className="waves-effect waves-light btn black"
                             onClick={changeToPreviousMonth}>
                             {Month[workingDate.getMonth() - 1]}
                             <i className="material-icons right">chevron_left</i>
@@ -116,7 +113,7 @@ export function MonthlyCalendar({ events }: MonthlyCalendarProperties) {
                         {Month[workingDate.getMonth()] + " " + workingDate.getFullYear()}
                         <button
                             type="button"
-                            className="waves-effect waves-light btn"
+                            className="waves-effect waves-light btn black"
                             onClick={changeToNextMonth}>
                             <i className="material-icons left">chevron_right</i>
                             {Month[workingDate.getMonth() + 1]}

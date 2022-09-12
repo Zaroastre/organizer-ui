@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { CalendarViewType } from "../../commons/CalendarViewType";
 import { Activity } from "../../entities/Activity";
+import { Day } from "../../entities/Day";
 import "./Calendar.css";
+import { CalendarProperties } from "./CalendarProperties";
+import { DailyCalendar } from "./DailyCalendar";
 import { MonthlyCalendar } from "./MonthlyCalendar";
 import { WeaklyCalendar } from "./WeaklyCalendar";
 
-interface CalendarProperties {
-    events: Array<Activity>;
-    view: CalendarViewType
-}
 
-export function Calendar({ events, view }: CalendarProperties) {
+
+export function Calendar({ now, events, view }: CalendarProperties) {
 
     const [activities, setActivities] = useState(new Array<Activity>());
     const [activeView, setActiveView] = useState(view);
+    const [currentDay, setCurretnDay] = useState(now);
+    const [minHour, setMinHour] = useState(6);
+    const [maxHour, setMaxHour] = useState(19);
 
     useEffect(() => {
         setActiveView(view);
@@ -28,15 +31,13 @@ export function Calendar({ events, view }: CalendarProperties) {
 
     switch (activeView) {
         case CalendarViewType.MONTH:
-            calendar = (<MonthlyCalendar events={activities} />)
+            calendar = (<MonthlyCalendar now={currentDay} events={activities} minHour={minHour} maxHour={maxHour} />)
             break;
         case CalendarViewType.WEAK:
-            calendar = (<WeaklyCalendar events={activities} />)
-
+            calendar = (<WeaklyCalendar now={currentDay} events={activities} minHour={minHour} maxHour={maxHour} />)
             break;
         case CalendarViewType.DAY:
-            calendar = (<></>)
-
+            calendar = (<DailyCalendar now={currentDay} events={activities} minHour={minHour} maxHour={maxHour} />)
             break;
         default:
             calendar = (<></>)

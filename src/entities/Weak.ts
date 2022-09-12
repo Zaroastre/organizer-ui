@@ -13,6 +13,14 @@ export class Weak {
     public getDays(): Array<Day> {
         return this.days;
     }
+
+    public static getNumberOfTheWeak = (date: Date) => {
+        let now: Date = date;
+        let start: Date = new Date(now.getFullYear(), 0, 1);
+        let days = Math.floor((now.getTime() - start.getTime()) /
+            (24 * 60 * 60 * 1000));
+        return Math.ceil(days / 7);
+    }
 }
 
 export class WeakFactory {

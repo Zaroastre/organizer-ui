@@ -1,4 +1,5 @@
-import { Activity } from "../../entities/Activity";
+import { PeriodicityType } from "../../commons/PeriodicityType";
+import { Activity, ActivityBuilderFactory } from "../../entities/Activity";
 import { Product } from "../../entities/Product";
 import { PlanningService } from "./PlanningService";
 
@@ -14,14 +15,16 @@ export class PlanningMockServiceProvider implements PlanningService {
         return PlanningMockServiceProvider.instance;
     }
 
-    
     private constructor(mustInitializaData: boolean = false) {
         this.activities = new Array<Activity>();
         if (mustInitializaData) {
-            this.activities.push(new Activity(
-                new Date(2022, 8, 5, 10, 15),
-                "Test"
-            ))
+            for (let index = 0; index < 10; index++) {
+                let now: Date = new Date();
+                now = new Date(now.setDate(now.getDate()+index));
+                now = new Date(now.setHours(now.getHours()+index));
+                let activity = ActivityBuilderFactory.create("Activity", now, PeriodicityType.DAILY).build();
+                this.activities.push(activity);
+            }
         }
         
     }

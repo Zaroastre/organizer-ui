@@ -1,6 +1,6 @@
 th > button {
     margin: 0 1rem;
-    width: 12rem;
+    width: 10rem;
 }
 
 td:not(:first-child):hover {
@@ -14,3 +14,6 @@ td a {
     width: 100%;
     height: 100%;
 }
+/* table td.hours:not() {
+    width: 1rem;
+} */

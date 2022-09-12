@@ -4,6 +4,7 @@ import { Calendar } from "../../components/calendar/Calendar";
 import { FoodCreator } from "../../components/foodCreator/FoodCreator";
 import { PantryList } from "../../components/pantryList/PantryList";
 import { Activity } from "../../entities/Activity";
+import { Day } from "../../entities/Day";
 import { PlanningService } from "../../services/planning/PlanningService";
 import "../views.css";
 import "./PlanningView.css"
@@ -37,13 +38,15 @@ export function PlanningView({planningService}: PlanningViewProperties) {
         <h1>Planning</h1>
         <div>
             <div>
+                <input type="radio" name="calendar-view" id="daily-calendar" value={CalendarViewType.DAY} defaultChecked={calendarView==CalendarViewType.DAY} onChange={updateCalendarView}/>
+                <label htmlFor="daily-calendar">Afficher le jour</label>
                 <input type="radio" name="calendar-view" id="weakly-calendar" value={CalendarViewType.WEAK} defaultChecked={calendarView==CalendarViewType.WEAK} onChange={updateCalendarView} />
                 <label htmlFor="weakly-calendar">Afficher la semaine</label>
                 <input type="radio" name="calendar-view" id="monthly-calendar" value={CalendarViewType.MONTH} defaultChecked={calendarView==CalendarViewType.MONTH} onChange={updateCalendarView}/>
                 <label htmlFor="monthly-calendar">Afficher le mois</label>
 
             </div>
-            <Calendar events={activities} view={calendarView}/>
+            <Calendar now={new Day(new Date())} events={activities} view={calendarView}/>
         </div>
     </section>);
 };
