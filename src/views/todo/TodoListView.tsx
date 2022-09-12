@@ -9,7 +9,8 @@ export function TodoListView({ }: TodoListViewProperties) {
     return (<section className="View" id="home">
         <h1>Liste des tâches à faire</h1>
         <div>
-            <p>TBD</p>
+            {/* <TaskCreator />
+            <TodoTasksList values={[]} /> */}
         </div>
     </section>);
 };

@@ -1,6 +1,6 @@
 section#planning div > label {
     display: inline-flex;
-    width: 8rem;
+    width: 9rem;
     padding: 0.5rem;
     cursor: pointer;
     border: solid 2px rgba(0,0,0,1);

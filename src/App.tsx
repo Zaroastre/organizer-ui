@@ -35,6 +35,7 @@ import { FamillyView } from './views/familly/FamillyView';
 import 'materialize-css';
 import './App.css';
 import { FoodCreatorView } from './views/pantry/FoodCreatorView';
+import { SettingsView } from './views/settings/SettingsView';
 
 function App() {
   const SERVICE_PROVIDER_TYPE: ServiceProviderType = ServiceProviderType.MOCK;
@@ -56,6 +57,7 @@ function App() {
           <Route path="planning/:year/:mounth/:day" element={<PlanningView planningService={PLANNING_SERVICE} />} />
           <Route path="meal" element={<MealView />} />
           <Route path="cooking-recipe" element={<CookingRecipeView />} />
+          <Route path="settings" element={<SettingsView />} />
         </Routes>
       </main>
       <Footer />
