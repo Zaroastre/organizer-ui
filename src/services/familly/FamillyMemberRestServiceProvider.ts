@@ -24,10 +24,17 @@ export class FamillyMemberRestServiceProvider implements FamillyMemberService {
         
     }
     
-    findById(id: number): Promise<FamillyMember> {
-        return new Promise<FamillyMember>((accept, reject) => {
-            reject(new Error("Method not implemented."));
-        });
+    findByEmail(email: string): Promise<FamillyMember> {
+        throw new Error("Method not implemented.");
+    }
+    addMember(member: FamillyMember): Promise<FamillyMember> {
+        throw new Error("Method not implemented.");
+    }
+    deleteById(id: number): Promise<FamillyMember> {
+        throw new Error("Method not implemented.");
+    }
+    listMembers(): Promise<FamillyMember[]> {
+        throw new Error("Method not implemented.");
     }
     
 };

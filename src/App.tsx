@@ -36,19 +36,22 @@ import 'materialize-css';
 import './App.css';
 import { FoodCreatorView } from './views/pantry/FoodCreatorView';
 import { SettingsView } from './views/settings/SettingsView';
+import { FamillyMemberService } from './services/familly/FamillyMemberService';
+import { FamillyMemberServiceFactory } from './services/familly/FamillyMemberServiceFactory';
 
 function App() {
   const SERVICE_PROVIDER_TYPE: ServiceProviderType = ServiceProviderType.MOCK;
   const FOOD_SERVICE: FoodService = FoodServiceFactory.create(SERVICE_PROVIDER_TYPE);
   const SHIPPING_SERVICE: ShoppingService = ShoppingServiceFactory.create(SERVICE_PROVIDER_TYPE);
   const PLANNING_SERVICE: PlanningService = PlanningServiceFactory.create(SERVICE_PROVIDER_TYPE);
+  const FAMILLY_SERVICE: FamillyMemberService = FamillyMemberServiceFactory.create(SERVICE_PROVIDER_TYPE);
   return (
     <BrowserRouter>
       <Header title='' icon={<></>} />
       <main>
         <Routes>
           <Route path="/" element={<HomeView />} />
-          <Route path="familly" element={<FamillyView />} />
+          <Route path="familly" element={<FamillyView famillyService={FAMILLY_SERVICE} />} />
           <Route path="todo" element={<TodoListView />} />
           <Route path="pantry" element={<PantryView foodService={FOOD_SERVICE} shoppingService={SHIPPING_SERVICE} />} />
           <Route path="pantry/food" element={<FoodCreatorView foodService={FOOD_SERVICE} />} />

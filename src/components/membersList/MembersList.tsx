@@ -10,7 +10,7 @@ export function MembersList({ values }: MembersListProperties) {
     const [famillyMembers, setFamillyMembers] = useState<Array<FamillyMember>>(new Array());
 
     useEffect(() => {
-        setFamillyMembers(new Array(...values));
+        setFamillyMembers(values);
     }, [values]);
 
     return (<table>

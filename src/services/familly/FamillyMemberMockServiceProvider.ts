@@ -20,31 +20,32 @@ export class FamillyMemberMockServiceProvider implements FamillyMemberService {
     }
 
     /**
-     * Generate a random number inside the range including limits (minimum, maximum).
-     * 
-     * @param min Minimum value to generate.
-     * @param max Maximum value to generate.
-     * @returns Random number.
-     */
-    private getRandomNumberInRange(min: number, max: number) { return Math.round(Math.random () * (max - min) + min) ; }
-
-    /**
-     * Constructor for this service provider.
-     * 
-     * @param mustInitializaData (Optionnal) Flag to indicate if the service provider embed some data or not.
-     */
-    private constructor(mustInitializaData: boolean = false) {
-        if (mustInitializaData) {
-        }
-
+    * Constructor for this service provider.
+    */
+    private constructor(mustInitializaData: boolean) {
 
     }
-    
-    findById(id: number): Promise<FamillyMember> {
-        return new Promise<FamillyMember>((resolve, reject) => {
-            
+
+    findByEmail(email: string): Promise<FamillyMember> {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+    addMember(member: FamillyMember): Promise<FamillyMember> {
+        return new Promise((resolve, reject) => {
+            MockDB.FAMILLY.push(member);
+            resolve(member);
+        });
+    }
+    deleteById(id: number): Promise<FamillyMember> {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+    listMembers(): Promise<FamillyMember[]> {
+        return new Promise((resolve, reject) => {
+            resolve(MockDB.FAMILLY);
         });
     }
 
-    
 };

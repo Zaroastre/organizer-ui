@@ -1,6 +1,5 @@
 import { PeriodicityType } from "../../commons/PeriodicityType";
 import { Activity, ActivityBuilderFactory } from "../../entities/Activity";
-import { Product } from "../../entities/Product";
 import { PlanningService } from "./PlanningService";
 
 export class PlanningMockServiceProvider implements PlanningService {
