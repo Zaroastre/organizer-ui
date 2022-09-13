@@ -27,6 +27,7 @@ export function MemberCreator({ famillyService, onAddedMember }: MemberCreatorPr
         let member: FamillyMember = new FamillyMember(email, firstName, lastName);
         famillyService.addMember(member).then((createdMember) => {
             onAddedMember(createdMember);
+            document.getElementById("reset")?.click();
         }).catch((reason) => {
             console.error(reason);
         })
@@ -55,6 +56,7 @@ export function MemberCreator({ famillyService, onAddedMember }: MemberCreatorPr
                         Ajouter
                         <i className="material-icons left">add</i>
                     </button>
+                    <button id="reset" type="reset" hidden />
                 </div>
             </div>
         </form>

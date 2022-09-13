@@ -23,7 +23,7 @@ export function FamillyView({ famillyService }: FamillyViewProperties) {
 
     const onAddedMemberHandler = (member: FamillyMember) => {
         famillyService.listMembers().then((membersList) => {
-            setFamillyMembers(membersList);
+            setFamillyMembers(new Array(...membersList));
         }).catch((reason) => {
             console.error(reason);
         })

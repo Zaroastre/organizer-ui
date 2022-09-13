@@ -29,6 +29,10 @@ export class Activity {
         return this.description;
     }
 
+    public getPeriodicity(): Periodicity|null {
+        return this.periodicity;
+    }
+
 }
 
 export interface ActivityBuilder {
