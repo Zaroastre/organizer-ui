@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Breadcrumbs } from "../breadcrumbs/Breadcrumbs";
 import { Menu } from "../menu/Menu";
+import MenuIcon from '@mui/icons-material/Menu';
+import "./Header.css";
 
 interface HeaderProperties {
     icon: JSX.Element;
@@ -26,11 +26,11 @@ export function Header({icon, title}: HeaderProperties) {
                 <div className="col s12">
                     <button
                         type="button"
-                        className="waves-effect waves-light btn black"
+                        className="btn black"
                         onClick={onDisplayMenuHandler}
                     >
-                        <i className="material-icons left">menu</i>
-                        Menu
+                        <MenuIcon />
+                        <span>Menu</span>
                     </button>
                 </div>
             </div>

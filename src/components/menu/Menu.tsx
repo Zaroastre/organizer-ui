@@ -22,10 +22,10 @@ export function Menu({ onClose }: MenuProperties) {
                     <Link to="planning">Planning</Link>
                 </li>
                 <li>
-                    <Link to="pantry">Garde*Manger</Link>
+                    <Link to="pantry">Garde-Manger</Link>
                 </li>
                 <li>
-                    <Link to="shopping">List de courses</Link>
+                    <Link to="shopping">Courses</Link>
                 </li>
                 <li>
                     <Link to="meal">Repas</Link>

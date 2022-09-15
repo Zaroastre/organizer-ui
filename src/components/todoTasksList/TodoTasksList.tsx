@@ -1,27 +1,26 @@
-import { Activity } from "../../entities/Activity";
+import { Task } from "../../entities/Task";
 
 interface TodoTasksListProperties {
-    values: Array<Activity>;
+    values: Array<Task>;
+
 }
 
-export function TodoTasksList({ values }:TodoTasksListProperties) {
+export function TodoTasksList({ values }: TodoTasksListProperties) {
     return (<section>
         <table>
             <thead>
                 <tr>
-                    <th>Starting Date</th>
-                    <th>Terminate Date</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Periodicity</th>
+                    <th>Nom</th>
+                    <th>Affectation</th>
+                    <th>Status</th>
+                    <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                {values.map((activity) => <tr>
-                    <th>{activity.getStartingDate().toISOString()}</th>
-                    <th>{activity.getTerminateDate().toISOString()}</th>
-                    <th>{activity.getName()}</th>
-                    <th>{activity.getDescription()}</th>
+                {values.map((task) => <tr>
+                    <th>{task.title}</th>
+                    <th>{task.affectations.toString()}</th>
+                    <th>{task.isDone}</th>
                     <th></th>
 
                 </tr>)}

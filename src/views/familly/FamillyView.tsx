@@ -30,7 +30,7 @@ export function FamillyView({ famillyService }: FamillyViewProperties) {
     }
     
     return (<section className="FamillyView View" id="home">
-        <h1>Ma Famille</h1>
+        <h1>Famille</h1>
         <div>
             <MemberCreator famillyService={famillyService} onAddedMember={onAddedMemberHandler} />
             <MembersList values={famillyMembers} />

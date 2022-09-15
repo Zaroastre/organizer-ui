@@ -1,0 +1,15 @@
+
+header > nav > div > div > button {
+    display: flex;
+    vertical-align: middle;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+header > nav > div > div > button > * {
+    margin: 0 0.5rem;
+    padding: 0;
+    display: inline-block;
+    vertical-align: middle;
+}

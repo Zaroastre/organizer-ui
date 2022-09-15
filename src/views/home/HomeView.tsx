@@ -30,7 +30,7 @@ export function HomeView({ }: HomeViewProperties) {
         new MenuItem("todo", "Tâches à faire"),
         new MenuItem("planning", "Planning"),
         new MenuItem("pantry", "Garde-Manger"),
-        new MenuItem("shopping", "Liste des courses"),
+        new MenuItem("shopping", "Courses"),
         new MenuItem("meal", "Repas"),
         new MenuItem("cooking-recipe", "Recettes de cuisine"),
         new MenuItem("settings", "Paramètres"),

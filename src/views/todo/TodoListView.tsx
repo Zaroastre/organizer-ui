@@ -1,7 +1,7 @@
 import { TaskCreator } from "../../components/taskCreator/TaskCreator";
 import { TodoTasksList } from "../../components/todoTasksList/TodoTasksList";
-import { Activity } from "../../entities/Activity";
 import { DailyPeriodicity } from "../../entities/Periodicity";
+import { Task } from "../../entities/Task";
 import "../views.css";
 
 interface TodoListViewProperties {
@@ -11,10 +11,16 @@ interface TodoListViewProperties {
 export function TodoListView({ }: TodoListViewProperties) {
     
     return (<section className="View" id="home">
-        <h1>Liste des tâches à faire</h1>
+        <h1>Tâches à faire</h1>
         <div>
             <TaskCreator />
-           <TodoTasksList values={[new Activity(new Date(), new Date(), "test", "Descrption", new DailyPeriodicity(new Date(), new Date(), false, 1, false))]} /> 
+           <TodoTasksList values={[
+            new Task("Couper les haies"),
+            new Task("Tondre"),
+            new Task("Appeller le notaire"),
+            new Task("Régler le permis piscine"),
+            new Task("Relancer l'électricien"),
+            ]} /> 
         </div>
     </section>);
 };

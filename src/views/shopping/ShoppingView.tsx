@@ -26,7 +26,7 @@ export function ShoppingView({shoppingService}: ShoppingViewProperties) {
     }
 
     return (<section className="View" id="shopping">
-        <h1>Liste des Courses</h1>
+        <h1>Courses</h1>
         <div>
             <ProductCreator shoppingService={shoppingService} onBuyProduct={refreshListOfFoods} />
             <CartList values={products} />
